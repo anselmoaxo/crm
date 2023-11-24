@@ -3,15 +3,24 @@
 {% block content %}
 
 
-  <h1 class='text-center text-muted'><strong>Clientes</strong></h1>
-  <div class="d-grid gap-3 p-1 d-md-flex justify-content-md-end ">
+  <h1 class='text-center text-info border-bottom'><strong>Clientes</strong></h1>
+  
+  <div class="d-grid gap-3 p-1 d-md-flex justify-content-md-start ">
   <a href='{% url "customer:create" %}'>
-  <button class="btn btn-outline-primary btn-sm " type="button">Adicionar Cliente</button>
+  <button class="btn btn-primary btn-sm" type="button">Adicionar Cliente</button>
   </a>
 </div>
+<form>
+<div class="input-group mt-2">
+  <input type="text" name='pesquisa_name' class="form-control" placeholder="Buscar por Nome de Cliente">
+  <div class="input-group-append mr-2">
+    <button class="btn btn-success btn" type="submit">Pesquisar Clientes</button>
+  </div>
+</div>
+</form>
 <div class="table-responsive shadow-lg p-3 mb-5  ">
   
-<table class="table table-light table-hover table-bordered ">
+<table class="table  table-hover table-bordered ">
   <thead>
     <tr>
       <th scope="col">Nome</th>
@@ -29,24 +38,21 @@
       <td >{{ customer.get_full_city}}</td>
       <td>{{ customer.get_full_phone_number}}</td>
       <td >{{ customer.email}}</td>
-      
-        <td class='text-center'><button type="button" class="btn btn-sm btn-outline-danger">Excluir</button>  
-          <a href='{{ customer.get_absolute_url }}  '><button type="button" class="btn btn-sm btn-outline-primary">Editar</button></a></td>
+      <form  method="post" action="{{ customer.get_delete_url }}"> {% csrf_token %}
+        <td class='text-center'>
+          <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button> 
+          <a href='{{ customer.get_absolute_url }}  '>
+            <button type="button" class="btn btn-sm btn-outline-primary">Editar</button></a>
+          </td>
+        </form>
+
     
     </tr>
     {% endfor %}
   </tbody>
 </table>
 </div>
-<ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Anterior</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Próximo</a>
-    </li>
-  </ul>
+
+{% include "paginacao.html" %}
+
 {% endblock  %}
