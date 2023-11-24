@@ -2,11 +2,14 @@
 
 {% block content %}
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-center border-bottom">
-  <h2><strong>Clientes</strong></h2>
-  <button class="btn btn-primary btn-sm mb-2 " type="button">Adicionar Clientes</button>
+
+  <h1 class='text-center'><strong>CLIENTES</strong></h1>
+  <div class="d-grid gap-3 p-1 d-md-flex justify-content-md-end ">
+  <a href='{% url "customer:create" %}'>
+  <button class="btn btn-outline-primary btn-sm " type="button">Adicionar Cliente</button>
+  </a>
 </div>
-<div class="shadow-lg p-3 mb-5 bg-body rounded">
+<div class="shadow-lg p-3 mb-5 border">
   
 <table class="table table-light table-striped table-hove table-bordered border-dark">
   <thead>
