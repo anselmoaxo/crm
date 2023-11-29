@@ -38,13 +38,37 @@
       <td >{{ customer.get_full_city}}</td>
       <td>{{ customer.get_full_phone_number}}</td>
       <td >{{ customer.email}}</td>
-      <form  method="post" action="{{ customer.get_delete_url }}"> {% csrf_token %}
+     
         <td class='text-center'>
-          <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button> 
+          <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#modal{{ customer.id }}" >Excluir</button> 
+          <!-- Modal -->
+              <div class=" shadow-lg p-4 mb-3 border modal fade" id="modal{{ customer.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header ">
+                      <h2 class="modal-title bg-light text-dark " id="exampleModalLabel"> Exclusão </h2>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     <small> Deseja Realizar a Exclusão do Cliente - <strong class= 'text-danger'>{{ customer.get_full_name}}</strong> ? </small>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <form method="post" action="{{ customer.get_delete_url }}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger btn-sm ">Excluir Cliente</button>
+                      </form>
+                      <button type="button" class="btn btn-warning btn-sm ml-3 " data-dismiss="modal">Fechar Modal</button>
+                  </div>
+                  
+                  </div>
+                </div>
+              </div>
           <a href='{{ customer.get_absolute_url }}  '>
             <button type="button" class="btn btn-sm btn-outline-primary">Editar</button></a>
           </td>
-        </form>
+        
 
     
     </tr>
