@@ -1,0 +1,65 @@
+
+{% extends "model-page.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<form class="d-sm" role="search">
+    <div class="row">
+    <div class="col">
+      <h2 class="text-warning">Listagem de Produtos</h2>
+        <a href=""  class="btn btn-outline-warning" title= "adiconar um novo  produto ">
+            <i class="fas fa-plus"></i> Adicionar Novo Produto</a>
+
+    </div>
+  </div>
+</form>
+<hr>
+<form class="row g-2">
+  <div class="col-sm-4">
+    <label for="inputPassword2" class="visually-hidden">Pesquisa</label>
+    <h5><small class="text-warning"> Pesquisa Produto </small></h5>
+    <div class="d-flex align-items-center">
+      <input type="text" class="form-control" id="pesquisar" name ='pesquisa' placeholder="pesquisa">
+      <button type="submit" class="btn btn-outline-warning btn-sm ms-2"><i class="bi bi-search"></i> Pesquisar</button>
+    </div>
+  </div>
+</form>
+<hr>
+<div class ='table-responsive-sm'></div>
+     <table class="table table-striped">
+      <tr>
+          <th class="text-warning">Produto</th>
+          <th class="text-warning">Cod. Barra</th>
+          <th class="text-warning">Quantidade</th>
+          <th class="text-warning">Preço</th>
+          <th class="text-warning">Unidade Medida</th>
+    </tr>
+
+    {% for campo in object_list %}
+
+    <tr>
+        <td class="text-white">{{ campo.prod_descricao }}</td>
+        <td class="text-white">{{ campo.codigo_barra }}</td>
+        <td class="text-white">{{ campo.quantidade }}</td>
+        <td class="text-white">{{ campo.preco }}</td>
+        <td class="text-white">{{ campo.unidade }}</td>
+        <td>
+           <a href="{% url 'editar_produto' campo.pk  %}"  class="btn btn-outline-warning btn-sm ms-1"  title= "Editar"><i class="bi bi-arrow-left-square-fill"></i> Editar</a>
+            <a href="{% url 'produto_detalhe' campo.pk  %}" class="btn btn-outline-warning btn-sm ms-1" title ="Movimentacao"><i class="bi bi-arrow-down-up"></i> Movimentação</a>
+           <a href="{% url 'excluir_produto' campo.pk  %}" class="btn btn-outline-danger btn-sm"  title ="Excluir"><i class="bi bi-x-square"></i> Excluir</a>
+        </td>
+    </tr>
+    {% empty%}
+    <tr>
+        <td colspan=" 5">Nenhum campo registrado</td>
+    </tr>
+  {% endfor %}
+  </thead>
+
+</table>
+</div>
+
+{% endblock %}

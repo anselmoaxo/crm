@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
+
 class ListCustomer(ListView):
     template_name = "customer/customer_list.html"
     paginate_by = 10

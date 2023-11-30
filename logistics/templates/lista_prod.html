@@ -3,18 +3,18 @@
 {% block content %}
 
 
-  <h1 class='text-center text-info border-bottom'><strong>Clientes</strong></h1>
+  <h1 class='text-center text-info border-bottom'><strong>Produto</strong></h1>
   
   <div class="d-grid gap-3 p-1 d-md-flex justify-content-md-start ">
-  <a href='{% url "customer:create" %}'>
-  <button class="btn btn-primary btn-sm" type="button">Adicionar Cliente</button>
+  <a href='{% url "produto" %}'>
+  <button class="btn btn-primary btn-sm" type="button">Adicionar Produto</button>
   </a>
 </div>
 <form>
 <div class="input-group mt-2">
-  <input type="text" name='pesquisa_name' class="form-control" placeholder="Buscar por Nome de Cliente">
+  <input type="text" name='pesquisa_name' class="form-control" placeholder="Buscar por Nome de Produto">
   <div class="input-group-append mr-2">
-    <button class="btn btn-success btn" type="submit">Pesquisar Clientes</button>
+    <button class="btn btn-success btn" type="submit">Pesquisar Produto</button>
   </div>
 </div>
 </form>
@@ -23,41 +23,41 @@
 <table class="table  table-hover table-bordered ">
   <thead>
     <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">Cidade</th>
-      <th scope="col">Telefone</th>
-      <th scope="col">Email</th>
+      <th scope="col">Produto</th>
+      <th scope="col">Unidade Medida</th>
+      <th scope="col">Quantidade</th>
+      <th scope="col">Preço</th>
       <th scope="col"></th>
      
     </tr>
   </thead>
   <tbody>
-   {% for customer in customers %}
+   {% for produto in produtos %}
     <tr class="bg-Secondary">
-      <td><a href='{{ customer.get_absolute_url }}'>{{ customer.get_full_name}}</a></td>
-      <td >{{ customer.get_full_city}}</td>
-      <td>{{ customer.get_full_phone_number}}</td>
-      <td >{{ customer.email}}</td>
+      <td><a href='{{ produto.prod_descricao }}'></a></td>
+      <td >{{ produto.unidade }}</td>
+      <td>{{ produto.quantidade }}</td>
+      <td >{{ produto.preco }}</td>
      
         <td class='text-center'>
-          <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal{{ customer.id }}" >Excluir</button> 
+          <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal{{ produto.id }}" >Excluir</button> 
           <!-- Modal -->
-              <div class=" shadow-lg p-3 mb-5  rounded modal fade" id="modal{{ customer.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+              <div class=" shadow-lg p-3 mb-5  rounded modal fade" id="modal{{ produto.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
                 <div class="modal-dialog " role="document">
                   <div class="modal-content ">
                     <div class="modal-header text-center align-items-center p-1 ">
-                      <h4 class="modal-title text-danger w-100 " id="exampleModalLabel">Exclusão - Cliente </h4>
+                      <h4 class="modal-title text-danger w-100 " id="exampleModalLabel">Exclusão - Produto </h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body ">
-                     <h6> Deseja Realizar a Exclusão do Cliente - <h4><strong class= 'text-info'>"{{ customer.get_full_name}}" ?</strong></h4>  </h6>
+                     <h6> Deseja Realizar a Exclusão do Produto - <h4><strong class= 'text-info'>"{{ produto.prod_descricao }}" ?</strong></h4>  </h6>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                      <form method="post" action="{{ customer.get_delete_url }}">
+                      <form method="post" action="">
                           {% csrf_token %}
-                          <button type="submit" class="btn btn-secondary btn-sm ">Excluir Cliente</button>
+                          <button type="submit" class="btn btn-secondary btn-sm ">Excluir Produto</button>
                       </form>
                       <button type="button" class="btn btn-secondary btn-sm ml-3 " data-dismiss="modal">Cancelar</button>
                   </div>
@@ -65,7 +65,7 @@
                   </div>
                 </div>
               </div>
-          <a href='{{ customer.get_absolute_url }}  '>
+          <a href=''>
             <button type="button" class="btn btn-sm btn-primary">Editar</button></a>
           </td>
         

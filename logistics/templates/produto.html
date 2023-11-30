@@ -1,0 +1,52 @@
+
+{% extends "model-page.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+  <div class="col-md-12 text-align: left;">
+    <h1 class='text-center text-info '><strong>Cadastro de Produto</strong></h1>
+<hr>
+<form action="" method="POST" class="row shadow-lg p-3 mb-10 border-rounded">
+    {% csrf_token %}
+    <div class="col-md-6 text-black">
+        <div style="text-align: left;">
+            {{ form.prod_descricao|as_crispy_field }}
+        </div>
+    </div>
+    <div class="col-md-6 text-black">
+        <div style="text-align: left;">
+            {{ form.codigo_barra|as_crispy_field }}
+        </div>
+    </div>
+    <div class="col-md-4 text-black">
+        <div style="text-align: left;">
+            {{ form.unidade|as_crispy_field }}
+        </div>
+    </div>
+     
+     
+    <div class="col-md-4 text-black">
+        <div style="text-align: left;">
+            {{ form.quantidade|as_crispy_field }}
+        </div>
+    </div>
+    <div class="col-md-4 text-black">
+        <div style="text-align: left;">
+            {{ form.preco|as_crispy_field }}
+        </div>
+    </div>
+    <hr>
+    <br>
+    <button type="submit" class="btn btn-primary btn-block m-3  "><i class="bi bi-save-fill"></i> Salvar Cadastro </button>
+
+</form>
+
+   
+  </div>
+
+</div>
+
+
+{% endblock %}

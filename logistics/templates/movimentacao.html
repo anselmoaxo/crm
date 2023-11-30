@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{%block titulo %}
+Lista de Produtos A.X.O
+{% endblock %}
+
+{% block content %}
+
+
+
+<form class="d-sm" role="search">
+    <div class="row">
+    <div class="col">
+      <h2 class="text-warning">MOVIMENTAÇÃO GERAL DO PRODUTOS</h2>
+    </div>
+  </div>
+</form>
+<hr>
+<hr>
+<form class="row g-2">
+  <div class="col-sm-4">
+    <label for="inputPassword2" class="visually-hidden">Pesquisa</label>
+    <h5><small class="text-warning"> Pesquisa Movimentação </small></h5>
+    <div class="d-flex align-items-center">
+      <input type="text" class="form-control" id="pesquisar" name ='pesquisa' placeholder="pesquisa">
+      <button type="submit" class="btn btn-outline-warning btn-sm ms-2"><i class="bi bi-search"></i> Pesquisar</button>
+    </div>
+  </div>
+</form>
+<hr>
+<div class ='table-responsive'></div>
+     <table class="table table-striped">
+      <tr>
+          <th class="text-warning">Tipo</th>
+          <th class="text-warning">Produto</th>
+          <th class="text-warning">Qtd.Movimentada</th>
+          <th class="text-warning">Saldo Estoque</th>
+          <th class="text-warning">Usuario</th>
+          <th class="text-warning">Data Movimento</th>
+    </tr>
+
+    {% for campo in object_list %}
+
+    <tr>
+        <td class="text-white">{{ campo.tipo }}</td>
+        <td class="text-white">{{ campo.produto }}</td>
+        <td class="text-white">{{ campo.quantidade }}</td>
+        <td class="text-white">{{ campo.saldo }}</td>
+        <td class="text-white">{{ campo.usuario }}</td>
+         <td class="text-white">{{ campo.data }}</td>
+
+    </tr>
+    {% empty%}
+    <tr>
+        <td colspan=" 5">Nenhum campo registrado</td>
+    </tr>
+  {% endfor %}
+  </thead>
+
+</table>
+</div>
+
+{% endblock %}
