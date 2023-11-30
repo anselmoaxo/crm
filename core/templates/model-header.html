@@ -26,6 +26,16 @@
         </div>
       </li>
     </ul>
+   
+   
   </div>
-  <a class="nav-link" href="">SAIR <span class="sr-only">(current)</span></a>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-white pt-1 shadow-lg p-2 mb-3 border border-rounded" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Olá, {{ request.user|upper }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <strong ><a class="dropdown-item" href="{% url "logout" %}">Sair </a></strong>
+     
+    </div>
+  </li>
 </nav>
