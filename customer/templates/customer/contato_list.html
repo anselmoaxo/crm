@@ -1,0 +1,82 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+
+
+  <h1 class='text-center text-info border-bottom'><strong>Contato</strong></h1>
+  
+  <div class="d-grid gap-3 p-1 d-md-flex justify-content-md-start ">
+  <a href='{% url "customer:contato_create" %}'>
+  <button class="btn btn-primary btn-sm" type="button">Adicionar Contato</button>
+  </a>
+</div>
+<form>
+<div class="input-group mt-2">
+  <input type="text" name='pesquisa_name' class="form-control" placeholder="Buscar por Nome de Contato">
+  <div class="input-group-append mr-2">
+    <button class="btn btn-success btn" type="submit">Pesquisar Contato</button>
+  </div>
+</div>
+</form>
+<div class="table-responsive shadow-lg p-3 mb-5  ">
+  
+<table class="table  table-hover table-bordered ">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Telefone</th>
+      <th scope="col">Cliente/Empresa</th>
+      <th scope="col"></th>
+     
+    </tr>
+  </thead>
+  <tbody>
+   {% for contato in contatos %}
+    <tr class="bg-Secondary">
+      <td><a href='{{ contato.get_absolute_url }}'>{{ contato.get_full_contato }}</a></td>
+      <td >{{ contato.email}}</td>
+      <td>{{ contato.phone}}</td>
+      <td class='text-info' ><a href='{{ contato.cliente.get_absolute_url }}'>{{ contato.cliente }}</a></td>
+     
+        <td class='text-center'>
+          <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal{{ contato.id }}" >Excluir</button> 
+          <!-- Modal -->
+              <div class=" shadow-lg p-3 mb-5  rounded modal fade" id="modal{{ contato.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog " role="document">
+                  <div class="modal-content ">
+                    <div class="modal-header text-center align-items-center p-1 ">
+                      <h4 class="modal-title text-danger w-100 " id="exampleModalLabel">Exclusão - Contato </h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body ">
+                     <h6> Deseja Realizar a Exclusão do Contato - <h4><strong class= 'text-info'>"{{ contato.get_full_contato }}" ?</strong></h4>  </h6>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <form method="post" action="{{ contato.get_delete_contato }}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-secondary btn-sm ">Excluir Contato</button>
+                      </form>
+                      <button type="button" class="btn btn-secondary btn-sm ml-3 " data-dismiss="modal">Cancelar</button>
+                  </div>
+                  
+                  </div>
+                </div>
+              </div>
+              <a href='{{ contato.get_update}}  '>
+            <button type="button" class="btn btn-sm btn-primary">Editar</button></a>
+          </td>
+        
+
+    
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% include "paginacao.html" %}
+
+{% endblock  %}

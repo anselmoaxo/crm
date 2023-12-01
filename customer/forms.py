@@ -1,5 +1,5 @@
 from django import forms
-from .models import Customer
+from .models import Customer, Contato 
 
 
 class DateInput(forms.DateInput):
@@ -29,4 +29,25 @@ class CustomerForm(forms.ModelForm):
             "country",
             "state", 
             "city"
+            )
+        
+
+class ContatoForm(forms.ModelForm):
+    first_name = forms.CharField(label='Nome')
+    last_name = forms.CharField(label='SobreNome')
+    email = forms.EmailField(label='E-Mail')
+    phone = forms.CharField(label='Telefone')
+    cliente = forms.ModelChoiceField(queryset=Customer.objects.all(), label='Cliente')
+    description = forms.CharField(label='Observação', widget=forms.Textarea)
+
+
+    class Meta:
+        model = Contato
+        fields = (
+            "first_name", 
+            "last_name", 
+            "email",
+            "phone",
+            "cliente",
+            "description"
             )

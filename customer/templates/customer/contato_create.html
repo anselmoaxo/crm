@@ -1,0 +1,35 @@
+{% extends "model-page.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+{% if form.erros %}
+  {% for field in form  %}
+    {% for error in field.errors %}
+      <div class='alert alert-danger'>
+        <strong> {{ error|escape }}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
+
+<div class="d-grid gap-3 d-md-flex justify-content-md-center">
+  <h1 class='text-center text-info border-bottom'><strong>Cadastro Contato</strong></h1>
+</div>
+<form  method="post">
+  {% csrf_token %}
+  <div class="shadow-lg p-3 mb-10 border-rounded ">
+  {{ form|crispy }}
+  
+  <div class="col-12 mx-auto">
+    <button class="btn btn-primary btn-block" type="submit">Salvar cadastro</button>
+    
+    
+  </div>
+</div>
+</form>
+
+
+{% endblock  %}
