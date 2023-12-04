@@ -55,7 +55,7 @@
                      <h6> Deseja Realizar a Exclusão do Contato - <h4><strong class= 'text-info'>"{{ contato.get_full_contato }}" ?</strong></h4>  </h6>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                      <form method="post" action="{{ contato.get_delete_contato }}">
+                      <form method="post" action="{% url "customer:contato_delete" contato.id %} ">
                           {% csrf_token %}
                           <button type="submit" class="btn btn-secondary btn-sm ">Excluir Contato</button>
                       </form>
@@ -65,7 +65,7 @@
                   </div>
                 </div>
               </div>
-              <a href='{{ contato.get_update}}  '>
+              <a href='{% url "customer:contato_update" contato.id %} '>
             <button type="button" class="btn btn-sm btn-primary">Editar</button></a>
           </td>
         

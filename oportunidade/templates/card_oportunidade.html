@@ -1,0 +1,69 @@
+{% extends "model-page.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+
+<h1 class='text-center text-info border-bottom'><strong>Negociações</strong></h1>
+  
+<div class="d-grid gap-3 p-1 d-md-flex justify-content-md-start ">
+<a href='{% url "oportunidade:oportunidade_create" %}'>
+<button class="btn btn-primary btn-sm" type="button">Adicionar Oportunidade</button>
+</a>
+</div>
+<form>
+<div class="input-group mt-2">
+<input type="text" name='pesquisa_name' class="form-control" placeholder="Buscar por Descrição de Oportunidade">
+<div class="input-group-append mr-2">
+  <button class="btn btn-success btn" type="submit">Pesquisar Negociações</button>
+</div>
+</div>
+</form>
+
+<style>
+  
+
+
+    .card {
+      transition: transform 0.3s;
+      box-shadow: 0 9px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px; /* Adicione uma margem inferior para espaçamento entre os cartões */
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+  <title>Oportunidades / Negociações</title>
+
+
+<div class="container mt-5 shadow-lg p-3 mb-8 bg-light  rounded">
+  <div class="flex-container d-flex flex-wrap">
+    {% for oportunidade in oportunidades %}
+    <div class="flex-item p-4 flex-xl-fill bd-highlight">
+        
+      <div class="card card border-info card bg-light">
+        <div class="card-body">
+          <h5 class="card-title text-center border-bottom">Oportunidade Nr. {{ oportunidade.id }}</h5>
+          <p class="card-text"><small class="text-muted ">Cliente : {{ oportunidade.cliente }}</small></p>
+          <p class="card-text"><small class="text-muted">Valor Estimado : {{ oportunidade.valor_estimado }}</small></p>
+          <p class="card-text"><small class="text-muted">Data Fechamento : {{ oportunidade.data_fechamento }}</small></p>
+          <p class="card-text text-danger"><small class="text-muted">Situação : {{ oportunidade.status }}</small></p>
+        
+          <div class="card-footer bg-transparent border-top"> 
+            <a href="#" class="btn btn-outline-primary btn-sm btn-block">Botão</a>
+        </div>
+        </div>
+      
+      </div>
+     
+    </div>
+    {% endfor %}
+  </div>
+ 
+</div>
+
+
+{% endblock  %}

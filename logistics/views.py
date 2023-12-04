@@ -1,13 +1,14 @@
+
+from django.db import models
+from django.db.models.query import QuerySet
+from django.shortcuts import render
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .models import Produto, UnidadeMedida
 from .forms import ProdutoForm
-from django.urls import reverse_lazy
-from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import DetailView
-from .models import Produto, EntradaNfe, SaidaNfe, Movimentacao
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
-from django.db import transaction
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -33,4 +34,21 @@ class ProdutoList(ListView):
         print(queryset)
         return queryset
 
-# Create your views here.
+
+class UpdateProduto(UpdateView):
+    template_name = "produto.html"
+    form_class = ProdutoForm
+    success_url = reverse_lazy('lista_prod')
+
+    def get_object(self):
+        id = self.kwargs.get('id')
+        return get_object_or_404(Produto, id=id)
+
+    
+class DeleteProduto(DeleteView):
+    model = Produto
+    success_url = reverse_lazy("lista_prod")
+    
+    def get_object(self):
+        id = self.kwargs.get('id')
+        return get_object_or_404(Produto, id=id)

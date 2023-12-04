@@ -55,7 +55,7 @@
                      <h6> Deseja Realizar a Exclusão do Produto - <h4><strong class= 'text-info'>"{{ produto.prod_descricao }}" ?</strong></h4>  </h6>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                      <form method="post" action="">
+                      <form method="post" action="{% url "produto_delete" produto.id %}">
                           {% csrf_token %}
                           <button type="submit" class="btn btn-secondary btn-sm ">Excluir Produto</button>
                       </form>
@@ -65,7 +65,7 @@
                   </div>
                 </div>
               </div>
-          <a href=''>
+          <a href='{% url "produto_update" produto.id %}'>
             <button type="button" class="btn btn-sm btn-primary">Editar</button></a>
           </td>
         

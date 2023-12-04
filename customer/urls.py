@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('contato_list/', ListContato.as_view(), name='contato_list'),
     path('contato_create/', CreateContato.as_view(), name='contato_create'),
-    path('<int:id>/', UpdateContato.as_view(), name='contato_update'),
-    path('<int:id>/delete/', DeleteContato.as_view(), name='contato_delete'),
+    path('contato/<int:id>/', UpdateContato.as_view(), name='contato_update'),
+    path('contato/<int:id>/delete/', DeleteContato.as_view(), name='contato_delete'),
     
 ]

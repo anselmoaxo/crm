@@ -59,13 +59,5 @@ class Contato (models.Model):
     def get_full_contato(self):
         return f'{self.first_name} {self.last_name}'
     
-    def get_absolute_url(self):
-        return reverse("customer:contato_update", kwargs={"id": self.id})
-    
-    def get_delete_url(self):
-        return reverse("customer:contato_delete", kwargs={"id": self.id})
-    
-    
-
     class Meta:
         db_table = "contato"

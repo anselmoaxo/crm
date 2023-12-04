@@ -28,4 +28,5 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('customer/', include("customer.urls")),
     path('logistics/', include("logistics.urls")),
+    path('oportunidade/', include("oportunidade.urls")),
 ]
